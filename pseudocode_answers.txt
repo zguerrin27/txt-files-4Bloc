@@ -1,0 +1,48 @@
+1. They use pseudocode to help design code before writing it. It is helpful because it is written for humans to understand, and provides a roadmap for you to follow when actually writing the code in whichever language you choose. 
+
+2. It will not run and will most likely throw an error. It is not a Software Development Language therefore an inperpreter will not 
+
+Programming Assignment
+
+1. 
+INPUT first number
+INPUT second number
+IF first number is larger than second number
+  PRINT first number
+ELSE IF first number is less than second number
+  PRINT second number
+END
+
+2.
+INIT a variable named index to 1
+WHILE index is less than 100
+  PRINT index
+  ADD value of 1 to index and REPEAT
+END once index is equal to 100
+
+3. 
+CREATE function called isInArray that asks for two inputs
+INPUT1 = Addressbook 
+INPUT2 = name that you are looking for 
+CALL .includes() method on Addressbook and pass in the name you are searching for
+RETURN true if Addressbook contains name 
+RETURN false if Addressbook does not contain name
+
+var addressbook = [
+  "Cindy",
+  "Tommy",
+  "Jessica",
+  "Zach",
+  "Rachel",
+  "John"
+];
+
+function isInArray(addressbook, name){
+  return addressbook.includes(name);
+}
+
+console.log(isInArray(addressbook, "Zach"));    // True
+console.log(isInArray(addressbook, "Ally"));    // False
+console.log(isInArray(addressbook, "Jess"));    // False
+console.log(isInArray(addressbook, "Rachel"));  // True
+
