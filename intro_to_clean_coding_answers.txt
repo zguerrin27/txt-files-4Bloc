@@ -1,0 +1,135 @@
+1. Clean code is the practice of writing professional, maintainable and easily readable code. 
+
+2. That is a very sad story about how a life was lost due mistakes and short cuts in the developmental process. Unfortunately I am sure that this could relate to almost any industry. Recently I read a news article about a huge cruise ship that lost all of its power and needed to have its 1000+ passengers evacuated via helecopter....I am sure many things went horribly wrong in that situation and I would be willing to bet that some was related to software. 
+
+3. I would say the naming could be better. From the given name of the function/variables I really dont know whats happening. Untill I read further.
+
+FUNCTION convertTemp(temp, newMeasurement)
+IF newMeasurement = "F" THEN
+SET newTemp to (temp - 32) * (5/9)
+PRINT newTemp
+
+ELSE IF newMeasurement = "C" THEN
+SET newTemp to temp * 1.8000 + 32.00
+PRINT newTemp
+
+END IF
+END FUNCTION
+
+4. I think its fine...The only thing I would change would be the word "sum" to just "num". To me "sum" indicates addtional took place somewhere. And move the print into the first part of the IF statement.
+
+FUNCTION calcPercent(num, total)
+ IF NOT(total = 0) THEN
+     SET percentage to num / total * 100
+     PRINT percentage
+ ELSE IF
+   PRINT "Sorry, cannot divide by 0"
+ END IF
+END FUNCTION
+
+5. 
+a.I only changed the function name...everything else seems okay.
+
+FUNCTION checkOut(subTotal, discountRate, paymentType)
+   PRINT "Your total due is: " + subTotal * discountRate + (subTotal * tax)
+
+   IF paymentType = 'CASH' THEN
+       CALL getPayment RETURNING amount
+       PRINT "Change due: " + amount - subTotal * discountRate + (subTotal * tax)
+   ELSE IF paymentType = 'CREDIT CARD' THEN
+       CALL getPayment RETURNING amount
+       PRINT "Your credit card has been charged: " + subTotal * discountRate + (subTotal * tax)
+   END IF
+END FUNCTION
+
+b. fix nesting
+
+FUNCTION checkoutBook(book, guest)                    
+ IF guest.accountActive and NOT(guest.hasOverdueBooks) and guest.outstandingFees = 0 THEN            
+    APPEND book to guest.books                
+    SET book.status to "Checked Out"         
+    PRINT "Your books have been issued."      
+ ELSE
+     PRINT "Unable to check out book."
+ END IF
+END FUNCTION
+
+c.
+
+CLASS Balance
+  FUNCTION displayBalance
+    PRINT balance
+  END FUNCTION
+END CLASS
+
+CLASS Deposit
+ FUNCTION deposit(amount)
+  SET balance to balance + amount
+ END FUNCTION
+END CLASS
+
+CLASS Withdraw
+ FUNCTION withdraw(amount)
+  IF balance > amount THEN
+    SET balance to balance - amount
+  END IF
+ END FUNCTION
+END CLASS
+
+CLASS offerCard
+ FUNCTION creditCardOffer
+  IF NOT(customer.hasCreditCard) THEN
+      CALL offerCreditCard
+  END IF
+ END FUNCTION
+END CLASS
+
+CLASS offerAccount
+ FUNCTION checkStatus
+  IF NOT(customer.hasCheckingAccount) THEN
+      CALL offerCheckingAccount
+  END IF
+ END FUNCTION
+END CLASS
+
+
+PROGRAMMING QUESTIONS
+
+6. See if the sum of the integers in array are a square root. If not then return sum 
+
+function sumSquareRoot(nums){
+  var sum = 0;
+    for (var i = 0; i < nums.length; i++) {
+    sum += nums[i];
+    }
+    var sqrt = Math.sqrt(sum);
+    var isWhole = Number.isInteger(sqrt);
+      if(isWhole){
+        return sqrt;
+      } else {
+        return sum;
+      }
+}
+
+
+console.log(sumSquareRoot([10,1,4,6,1,1,2]));
+console.log(sumSquareRoot([1,1]));
+
+7. See if an array has duplicate values 
+
+function containsDuplicates(nums){
+  for( var i = 0; i <= nums.length; i++){
+    for(var j = i; j <= nums.length; j++){
+      if(i != j && nums[i] == nums[j]){
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+console.log(containsDuplicates([10,2,5,6,10])); 
+console.log(containsDuplicates([10,2,5,6,11]));  
+
+
+
