@@ -1,0 +1,49 @@
+1. A stack follows the idea of last in first out order...this could be visualised as a stack of papers or a stack of lunch trays in a cafeteria. A queue follows a first in first out order. This can represented as a traditional line of people waiting to enter a  building or recieved service etc. 
+
+2. They both help you organize a list of things into an order..that then makes it easier to edit and manipulate.
+
+3. I would use the Stack Data Structure for both..because undo and redo have to do with the last action that was taken, but not the ones before it. 
+
+PROGRAMMING QUESTIONS 
+
+1. 
+
+function reverseString(string) {
+    var newString = "";
+    for (var i = string.length - 1; i >= 0; i--) {
+        newString += string[i];
+    }
+    return newString;
+}
+console.log(reverseString("Bloc!"));
+
+2. Really unsure of the directions for this question...this is probably wrong but could you re word the question for me? Thank you,
+
+function stackPop(list){
+  let newList = list.pop();
+  //console.log(list);
+  return newList;
+}
+
+
+console.log(stackPop(["Zach", "Tommy", "Tanya"]));
+console.log(stackPop(["Zach", "Tommy", ]));
+
+3.
+
+let queue = ["Zach", "Sandy", "Kenny"];
+
+function enqueue(name){
+//   let queue = ["Zach", "Sandy", "Kenny"];
+  queue.push(name);
+  return queue;
+}
+
+function dequeue(){
+  let temp = queue.shift();
+  console.log(queue);
+  return temp;
+}
+
+console.log(enqueue("Calum"));
+console.log(dequeue());
