@@ -1,0 +1,209 @@
+1. Some pros to using linked list's is how they utilize memory. They allocate memory anywhere on the disk which allows the lists to grow quickly and easily to large sized..A drawback would be that it makes it slower and harder to find an item that is deep within the stack or list. An array uses index's which makes it much quicker to locate the item you are searching for.
+
+2. A train would be an example of a real-world linked list
+
+
+
+********   Programming Questions  ********* 
+
+1.
+
+The pseudo code doesnt add new nodes to the end of the list. It just keeps adding a node next to the current head. You need to check if there is another node after the head, and if so add the new node after that ( as long as there isnt another after it)
+
+FUNCTION push(element)
+CREATE node
+SET node.value TO element
+SET node.next TO null
+
+IF the head node does not exist
+ THEN SET head to node
+ELSE
+ SET current to head
+ WHILE there is a next                                            ** added
+ iterate to the end of list of nodes by moving node to node       ** added
+ THEN                                                             ** added
+ SET current.next to node
+END IF
+END FUNCTION
+
+
+
+function LinkedList(){  
+  this.head = null;
+}
+
+LinkedList.prototype.push = function (val) {
+    var node = {
+        data: val,
+        next:null
+    };
+
+    if (!this.head) {
+        this.head = node;
+    } else {
+        var p1 = this.head;
+        while (p1.next) {
+            p1 = p1.next;
+        }
+        p1.next = node;
+    }
+};
+
+let ll = new LinkedList();
+
+ll.push(235)
+ll.push(245)
+ll.push(123)
+ll.push(1865)
+
+console.log(ll.head.data);
+console.log(ll.head.next.data);
+console.log(ll.head.next.next.data);
+console.log(ll.head.next.next.next.data);
+
+
+2.                                                                         ********* Problem 2 *********
+
+function LinkedList () {
+    this.head = null;
+}
+
+LinkedList.prototype.push = function (val) {
+    var node = {
+        data: val,
+        next:null
+    };
+
+    if (!this.head) {
+        this.head = node;
+    } else {
+        var p1 = this.head;
+        while (p1.next) {
+            p1 = p1.next;
+        }
+        p1.next = node;
+    }
+};
+
+
+LinkedList.prototype.removeDuplicates = function () {
+    // Empty or a single element Linked List
+    if (!this.head || !this.head.next) {
+      console.log('No duplicates were found. Empty or a single element Linked List.');
+      return;
+    }
+
+    var p1;
+    var p2;
+    var nodes = {};
+
+    p1 = this.head;
+    p2 = p1.next;
+    nodes[p1.data] = true;
+
+    while (p2) {
+        var data = p2.data;
+        if (nodes[data]) {
+            p1.next = p2.next;
+        } else {
+            nodes[data] = true;
+            p1 = p2;
+        }
+        p2 = p2.next;
+    }
+};
+
+
+let ll = new LinkedList();
+
+ll.push('a');
+ll.push('c');
+ll.push('d');
+ll.push('d');
+ll.push('a');
+
+console.log(ll.head.data);
+console.log(ll.head.next.data);
+console.log(ll.head.next.next.data);
+console.log(ll.head.next.next.next.data);
+console.log(ll.head.next.next.next.next.data);
+
+ll.removeDuplicates();
+
+console.log("------------- New List Below ----------------")
+
+console.log(ll.head.data);
+console.log(ll.head.next.data);
+console.log(ll.head.next.next.data);
+console.log(ll.head.next.next.next); // just to show end of LL
+
+
+
+
+3.                                                                        ********* Problem 3 **********
+
+function LinkedList () {
+    this.head = null;
+}
+
+LinkedList.prototype.push = function (val) {
+    var node = {
+        data: val,
+        next:null
+    };
+
+    if (!this.head) {
+        this.head = node;
+    } else {
+        var p1 = this.head;
+        while (p1.next) {
+            p1 = p1.next;
+        }
+        p1.next = node;
+    }
+};
+
+
+LinkedList.prototype.reverseLinkedList = function () {
+
+  // Empty or a single element Linked List
+  if (!this.head || !this.head.next) {
+    console.log('No duplicates were found. Empty or a single element Linked List.');
+    return;
+  }
+  
+  var p1 = null;
+  var p2 = this.head;
+  var p3;
+
+  while (p2) {
+    p3 = p2.next;
+    p2.next = p1;
+    p1 = p2;
+    p2 = p3;
+  }
+
+  this.head = p1;
+}
+
+
+let ll = new LinkedList();
+
+ll.push('a');
+ll.push('b');
+ll.push('c');
+ll.push('d');
+
+console.log(ll.head.data);
+console.log(ll.head.next.data);
+console.log(ll.head.next.next.data);
+console.log(ll.head.next.next.next.data);
+
+console.log('-------- Reversed Below --------');
+
+ll.reverseLinkedList();
+
+console.log(ll.head.data);
+console.log(ll.head.next.data);
+console.log(ll.head.next.next.data);
+console.log(ll.head.next.next.next.data);
