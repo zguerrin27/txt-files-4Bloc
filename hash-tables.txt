@@ -1,0 +1,252 @@
+What is a hash table?
+What is hashing?
+How does a hash table store data?
+How are hash tables and objects different?
+Determine whether you would use a hash table or an object to store each of the following pieces of data:
+-A list of pets and their unique names.
+-The name, age, and the birthday of your best friend.
+-The name and location of every company in a given city.
+-All of the books checked out from a library by a particular individual.
+-The primary and secondary phone numbers for a contact.
+
+Programming Questions
+
+Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
+
+Create a hash table that allows a store owner to track their store's inventory and quantity.
+
+Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
+
+
+
+
+
+1. A hash table is a data sctructure organized in a Key-Value way. It stores values in buckets and allows keys to access it, making it easy to retreive the data.
+
+2. Hashing is the process of converting "Keys" which is made up data, and converting it into a fixed-length "Hash Code" used to store/locate data in the Hash table
+
+3. A hash table stores data by converting a Key to a hash code and then looking up the Array index with it, then storing the value in the array index. 
+
+4. If your data is a static number of distinct values of different types, then an object is the optimal choice. Use a hash table when your data contains a variable number of consistently formatted values, each with an identifier. A Hash Table has a Key and A Value...whereas the Object can have a bunch of property names that determine the type of data.
+
+5. 
+- Hash Table 
+- Object
+- Object
+- Hash Table
+- Object
+
+******* Programming Questions ********
+
+1. 
+
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 14;
+  
+  this.print = function() {
+    console.log(storage)
+  }
+
+  this.add = function(key, value, value2) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [
+        [key, value, value2]
+      ];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
+          storage[index][i][2] = value2;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([key, value, value2]);
+      }
+    }
+  };
+
+  this.lookup = function(key) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i];
+        }
+      }
+    }
+  };
+
+};
+
+
+ 
+let ht = new HashTable();
+
+ht.add('603-714-5058', 'Zach', '61 main st');
+ht.add('603-123-4567', 'Rachel', '62 main st');
+ht.add('603-555-2424', 'Steve', '34 Brooklyn Ave');
+ht.add('603-222-4444', 'Karyn', '45 Sauce Ave');
+
+ht.print();
+
+console.log(ht.lookup('603-714-5058'));
+console.log(ht.lookup('603-123-4567'));
+
+
+2.
+
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 14;
+  
+  this.print = function() {
+    console.log(storage)
+  }
+
+  this.add = function(key, value) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [
+        [key, value]
+      ];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([key, value]);
+      }
+    }
+  };
+  
+  this.lookup = function(key) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i][1];
+        }
+      }
+    }
+  };
+
+};
+
+
+ 
+let ht = new HashTable();
+
+ht.add('Tooth Brush', '42');
+ht.add('Toilet Brush', '16');
+ht.add('Nail Polish', '4');
+ht.add('Water Bottle', '14');
+
+ht.print();
+
+console.log("Quantity: " + ht.lookup('Tooth Brush'));
+console.log("Quantity: " + ht.lookup('Nail Polish'));
+
+
+3.
+
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 14;
+  
+  this.print = function() {
+    console.log(storage)
+  }
+
+  this.add = function(key, value) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [
+        [key, value]
+      ];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = value;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([key, value]);
+      }
+    }
+  };
+  
+  this.lookup = function(key) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i][1];
+        }
+      }
+    }
+  };
+
+};
+
+ 
+let ht = new HashTable();
+
+ht.add('some publisher, 12/22/2004' , 'NewsPaper Article 1');
+ht.add('some publisher 2, 12/22/1965' , 'NewsPaper Article 2');
+ht.add('some publisher 3, 12/22/1930' , 'NewsPaper Article 3');
+ht.add('some publisher 4, 12/22/2019' , 'NewsPaper Article 4');
+
+ht.print();
+
+console.log(ht.lookup('some publisher, 12/22/2004'));
+console.log(ht.lookup('some publisher 2, 12/22/1965'));
+
+
+
+
+
+
+
