@@ -1,26 +1,3 @@
-What is a hash table?
-What is hashing?
-How does a hash table store data?
-How are hash tables and objects different?
-Determine whether you would use a hash table or an object to store each of the following pieces of data:
--A list of pets and their unique names.
--The name, age, and the birthday of your best friend.
--The name and location of every company in a given city.
--All of the books checked out from a library by a particular individual.
--The primary and secondary phone numbers for a contact.
-
-Programming Questions
-
-Create a hash table that allows a sales associate to enter a customer's name, address, and phone number into the system and look up customers using their phone numbers.
-
-Create a hash table that allows a store owner to track their store's inventory and quantity.
-
-Create a hash table that allows digital copies of newspapers to be entered and searched by publisher and publication date.
-
-
-
-
-
 1. A hash table is a data sctructure organized in a Key-Value way. It stores values in buckets and allows keys to access it, making it easy to retreive the data.
 
 2. Hashing is the process of converting "Keys" which is made up data, and converting it into a fixed-length "Hash Code" used to store/locate data in the Hash table
@@ -38,7 +15,99 @@ Create a hash table that allows digital copies of newspapers to be entered and s
 
 ******* Programming Questions ********
 
-1. 
+1. - updated 
+
+var hash = (string, max) => {
+  var hash = 0;
+  for (var i = 0; i < string.length; i++) {
+    hash += string.charCodeAt(i);
+  }
+  return hash % max;
+};
+
+let HashTable = function() {
+
+  let storage = [];
+  const storageLimit = 14;
+  
+  this.print = function() {
+    console.log(storage)
+  }
+
+  this.add = function(data, storageLimit) {
+    var key = data.phoneNumber;
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      storage[index] = [data];
+    } else {
+      var inserted = false;
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          storage[index][i][1] = data;
+          inserted = true;
+        }
+      }
+      if (inserted === false) {
+        storage[index].push([data]);
+      }
+    }
+  };
+
+  this.lookup = function(key) {
+    var index = hash(key, storageLimit);
+    if (storage[index] === undefined) {
+      return undefined;
+    } else {
+      for (var i = 0; i < storage[index].length; i++) {
+        if (storage[index][i][0] === key) {
+          return storage[index][i];
+        }
+      }
+    }
+  };
+
+};
+
+
+ 
+let ht = new HashTable();
+
+ht.add({
+  name: 'Zach',
+  phoneNumber: '603-111-2222',
+  address: '61 main st'
+}, 25);
+ht.add({
+  name: 'Rachel',
+  phoneNumber: '603-222-1111',
+  address: '62 main st'
+}, 25);
+
+
+ht.lookup({
+  phoneNumber: '603-111-2222',
+}); // => if element is found returns object, otherwise error message
+
+
+// ht.add('603-714-5058', 'Zach', '61 main st');
+// ht.add('603-123-4567', 'Rachel', '62 main st');
+// ht.add('603-555-2424', 'Steve', '34 Brooklyn Ave');
+// ht.add('603-222-4444', 'Karyn', '45 Sauce Ave');
+
+ ht.print();
+
+// console.log(ht.lookup('603-714-5058'));
+// console.log(ht.lookup('603-123-4567'));
+
+
+// console.log(hash('quincy', 10))
+
+
+
+
+
+1. --- old answer 
+
 
 var hash = (string, max) => {
   var hash = 0;
