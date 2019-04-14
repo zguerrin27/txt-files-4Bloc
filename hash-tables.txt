@@ -15,304 +15,209 @@
 
 ******* Programming Questions ********
 
-1. - updated 
+1    ----------------------------------------------------------------------------------------------------------------------------------------
 
-var hash = (string, max) => {
-  var hash = 0;
-  for (var i = 0; i < string.length; i++) {
-    hash += string.charCodeAt(i);
+var hash = (key, buckets) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i);
   }
-  return hash % max;
+  return hashCode % buckets;
 };
 
-let HashTable = function() {
 
-  let storage = [];
-  const storageLimit = 14;
+let HashTable = function (){
   
-  this.print = function() {
-    console.log(storage)
+  let storage = [];
+  let numberOfBuckets = 23;
+  
+  this.print = function(){
+    console.log(storage);
   }
-
-  this.add = function(data, storageLimit) {
-    var key = data.phoneNumber;
-    var index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
-      storage[index] = [data];
+  
+  this.add = function(customerObj){
+    
+    let key = customerObj.number;
+    let index = hash(key, numberOfBuckets);
+    if(storage[index] === undefined){
+      storage[index] = customerObj;
     } else {
-      var inserted = false;
-      for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          storage[index][i][1] = data;
-          inserted = true;
-        }
+      while(storage[index] !== undefined){
+        index++;
       }
-      if (inserted === false) {
-        storage[index].push([data]);
-      }
+      storage[index] = customerObj;
     }
   };
-
-  this.lookup = function(key) {
-    var index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
-      return undefined;
-    } else {
-      for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          return storage[index][i];
-        }
-      }
-    }
+  
+  this.lookup = function(newKey){
+    let index = hash(newKey, numberOfBuckets);
+    return storage[index];
   };
-
+  
 };
 
 
- 
 let ht = new HashTable();
 
-ht.add({
+var zach = {
   name: 'Zach',
-  phoneNumber: '603-111-2222',
+  number: '111-222-3333',
   address: '61 main st'
-}, 25);
-ht.add({
+};
+var rachel = {
   name: 'Rachel',
-  phoneNumber: '603-222-1111',
+  number: '222-333-4444',
   address: '62 main st'
-}, 25);
-
-
-ht.lookup({
-  phoneNumber: '603-111-2222',
-}); // => if element is found returns object, otherwise error message
-
-
-// ht.add('603-714-5058', 'Zach', '61 main st');
-// ht.add('603-123-4567', 'Rachel', '62 main st');
-// ht.add('603-555-2424', 'Steve', '34 Brooklyn Ave');
-// ht.add('603-222-4444', 'Karyn', '45 Sauce Ave');
-
- ht.print();
-
-// console.log(ht.lookup('603-714-5058'));
-// console.log(ht.lookup('603-123-4567'));
-
-
-// console.log(hash('quincy', 10))
-
-
-
-
-
-1. --- old answer 
-
-
-var hash = (string, max) => {
-  var hash = 0;
-  for (var i = 0; i < string.length; i++) {
-    hash += string.charCodeAt(i);
-  }
-  return hash % max;
+};
+var steve = {
+  name: 'Steve',
+  number: '333-444-5555',
+  address: '63 main st'
 };
 
-let HashTable = function() {
+ht.add(zach);
+ht.add(rachel);
+ht.add(steve);
 
-  let storage = [];
-  const storageLimit = 14;
+// ht.print();
+
+console.log(ht.lookup('333-444-5555'));
+console.log(ht.lookup('111-222-3333'));
+console.log(ht.lookup('222-333-4444'));
+
+
+2.  ----------------------------------------------------------------------------------------------------------------------------------------
+
+var hash = (key, buckets) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i);
+  }
+  return hashCode % buckets;
+};
+
+
+let HashTable = function (){
   
-  this.print = function() {
-    console.log(storage)
+  let storage = [];
+  let numberOfBuckets = 23;
+  
+  this.print = function(){
+    console.log(storage);
   }
-
-  this.add = function(key, value, value2) {
-    var index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
-      storage[index] = [
-        [key, value, value2]
-      ];
+  
+  this.add = function(itemObj){
+    
+    let key = itemObj.name;
+    let index = hash(key, numberOfBuckets);
+    if(storage[index] === undefined){
+      storage[index] = itemObj;
     } else {
-      var inserted = false;
-      for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          storage[index][i][1] = value;
-          storage[index][i][2] = value2;
-          inserted = true;
-        }
+      while(storage[index] !== undefined){
+        index++;
       }
-      if (inserted === false) {
-        storage[index].push([key, value, value2]);
-      }
+      storage[index] = itemObj;
     }
   };
-
-  this.lookup = function(key) {
-    var index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
-      return undefined;
-    } else {
-      for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          return storage[index][i];
-        }
-      }
-    }
+  
+  this.lookup = function(newKey){
+    let index = hash(newKey, numberOfBuckets);
+    return storage[index];
   };
-
+  
 };
 
 
- 
 let ht = new HashTable();
 
-ht.add('603-714-5058', 'Zach', '61 main st');
-ht.add('603-123-4567', 'Rachel', '62 main st');
-ht.add('603-555-2424', 'Steve', '34 Brooklyn Ave');
-ht.add('603-222-4444', 'Karyn', '45 Sauce Ave');
+var dishSoap = {
+  name: 'dish soap',
+  quantity: '44'
+};
+var hairBrush = {
+  name: 'hair brush',
+  quantity: '14'
+};
+var toothPaste = {
+  name: 'tooth paste',
+  quantity: 23
+};
+
+
+ht.add(dishSoap);
+ht.add(hairBrush);
+ht.add(toothPaste);
 
 ht.print();
 
-console.log(ht.lookup('603-714-5058'));
-console.log(ht.lookup('603-123-4567'));
+console.log(ht.lookup('dish soap'));
+console.log(ht.lookup('hair brush'));
+console.log(ht.lookup('tooth paste'));
 
 
-2.
+3.  ----------------------------------------------------------------------------------------------------------------------------------------
 
-var hash = (string, max) => {
-  var hash = 0;
-  for (var i = 0; i < string.length; i++) {
-    hash += string.charCodeAt(i);
+var hash = (key, buckets) => {
+  var hashCode = 0;
+  for (var i = 0; i < key.length; i++) {
+    hashCode += key.charCodeAt(i);
   }
-  return hash % max;
+  return hashCode % buckets;
 };
 
-let HashTable = function() {
 
+let HashTable = function (){
+  
   let storage = [];
-  const storageLimit = 14;
+  let numberOfBuckets = 23;
   
-  this.print = function() {
-    console.log(storage)
+  this.print = function(){
+    console.log(storage);
   }
-
-  this.add = function(key, value) {
-    var index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
-      storage[index] = [
-        [key, value]
-      ];
+  
+  this.add = function(articleObj){
+    
+    let key = (articleObj.publisher + ', ' + articleObj.date)
+    let index = hash(key, numberOfBuckets);
+    if(storage[index] === undefined){
+      storage[index] = articleObj;
     } else {
-      var inserted = false;
-      for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          storage[index][i][1] = value;
-          inserted = true;
-        }
+      while(storage[index] !== undefined){
+        index++;
       }
-      if (inserted === false) {
-        storage[index].push([key, value]);
-      }
+      storage[index] = articleObj;
     }
   };
   
-  this.lookup = function(key) {
-    var index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
-      return undefined;
-    } else {
-      for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          return storage[index][i][1];
-        }
-      }
-    }
+  this.lookup = function(keyObj){
+    let index = hash(keyObj, numberOfBuckets);
+    return storage[index];
   };
-
+  
 };
 
 
- 
 let ht = new HashTable();
 
-ht.add('Tooth Brush', '42');
-ht.add('Toilet Brush', '16');
-ht.add('Nail Polish', '4');
-ht.add('Water Bottle', '14');
-
-ht.print();
-
-console.log("Quantity: " + ht.lookup('Tooth Brush'));
-console.log("Quantity: " + ht.lookup('Nail Polish'));
-
-
-3.
-
-var hash = (string, max) => {
-  var hash = 0;
-  for (var i = 0; i < string.length; i++) {
-    hash += string.charCodeAt(i);
-  }
-  return hash % max;
+var NewYorker = {
+  publisher: 'LV Review Journal',
+  date: '09-25-1993',
+  paper: 'Heavy Traffic due to major road work'
+};
+var WallStreetJournal = {
+  publisher: 'WS Journal Review',
+  date: '07-25-2004',
+  paper: 'Tiger Wins The Masters!!'
 };
 
-let HashTable = function() {
 
-  let storage = [];
-  const storageLimit = 14;
-  
-  this.print = function() {
-    console.log(storage)
-  }
+ht.add(NewYorker);
+ht.add(WallStreetJournal);
 
-  this.add = function(key, value) {
-    var index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
-      storage[index] = [
-        [key, value]
-      ];
-    } else {
-      var inserted = false;
-      for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          storage[index][i][1] = value;
-          inserted = true;
-        }
-      }
-      if (inserted === false) {
-        storage[index].push([key, value]);
-      }
-    }
-  };
-  
-  this.lookup = function(key) {
-    var index = hash(key, storageLimit);
-    if (storage[index] === undefined) {
-      return undefined;
-    } else {
-      for (var i = 0; i < storage[index].length; i++) {
-        if (storage[index][i][0] === key) {
-          return storage[index][i][1];
-        }
-      }
-    }
-  };
+// ht.print();
 
-};
-
- 
-let ht = new HashTable();
-
-ht.add('some publisher, 12/22/2004' , 'NewsPaper Article 1');
-ht.add('some publisher 2, 12/22/1965' , 'NewsPaper Article 2');
-ht.add('some publisher 3, 12/22/1930' , 'NewsPaper Article 3');
-ht.add('some publisher 4, 12/22/2019' , 'NewsPaper Article 4');
-
-ht.print();
-
-console.log(ht.lookup('some publisher, 12/22/2004'));
-console.log(ht.lookup('some publisher 2, 12/22/1965'));
-
+console.log(ht.lookup('LV Review Journal, 09-25-1993'));
+console.log(ht.lookup('WS Journal Review, 07-25-2004'));
 
 
 
