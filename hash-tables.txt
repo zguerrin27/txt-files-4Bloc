@@ -176,8 +176,7 @@ let HashTable = function (){
   }
   
   this.add = function(articleObj){
-    
-    let key = (articleObj.publisher + ', ' + articleObj.date)
+    let key = (articleObj.publisher + articleObj.date);
     let index = hash(key, numberOfBuckets);
     if(storage[index] === undefined){
       storage[index] = articleObj;
@@ -189,16 +188,15 @@ let HashTable = function (){
     }
   };
   
-  this.lookup = function(keyObj){
-    let index = hash(keyObj, numberOfBuckets);
+  this.lookup = function(lookupObj){
+    let key = (lookupObj.publisher + lookupObj.date);
+    let index = hash(key, numberOfBuckets);
     return storage[index];
   };
   
 };
 
-
 let ht = new HashTable();
-
 var NewYorker = {
   publisher: 'LV Review Journal',
   date: '09-25-1993',
@@ -210,17 +208,20 @@ var WallStreetJournal = {
   paper: 'Tiger Wins The Masters!!'
 };
 
-
 ht.add(NewYorker);
 ht.add(WallStreetJournal);
 
 // ht.print();
 
-console.log(ht.lookup('LV Review Journal, 09-25-1993'));
-console.log(ht.lookup('WS Journal Review, 07-25-2004'));
+var NYLookup = {
+  publisher: 'LV Review Journal',
+  date: '09-25-1993'
+}
 
+console.log(ht.lookup(NYLookup));
 
-
-
-
+console.log(ht.lookup({
+  publisher: 'WS Journal Review',
+  date: '07-25-2004'
+}));
 
