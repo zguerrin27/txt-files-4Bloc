@@ -1,37 +1,59 @@
 1. 
 Making a Coffee
 
-CREATE function makeCoffee()
-FILL water resevior in coffee machine
-PLACE one coffee filter into coffee machine 
-DUMP 3 scoops of coffee into coffee machine
-PLACE one coffee cup under spout 
-PRESS on button
+FUNCTION makeDoubleDoubleCoffee();
+    ADD coffee in coffee machine;
+    ADD water to coffee machine;
+    Start coffee machine;
+    WHILE (cup not full)
+      DO keep filling cup of coffee;
+    END WHILE
+    IF (sugar is required)
+      THEN Add two sugars;
+      ELSE don’t add two sugars;
+    END IF
+    ADD two creams;
+    Serve;
+END
 
 Washing Dishes
 
-FILL one sink with warm soapy water
-REMOVE one dish from dirtyStack 
-PlACE dirty dish into Sink
-USE sponge to clean dish
-RINSE dish with clean water over second sink
-PlACE dish in drying rack
+FUNCTION washDishes();
+  ADD 1oz of dish soap to sink;
+  WHILE(sink is plugged AND sink not full);
+    run hot water;
+  END WHILE
+  WHILE(stack of dirty dishes);
+    DO remove dish from stack ;
+    DO place dish into sink ;
+    DO clean with sponge;
+      IF(dish still dirty)
+        THEN clean with rough side;
+      END IF
+    DO rinse dish;
+    DO place dish in dryer rack;
+  END WHILE
+  DO remove drain plug;
+END
+
 
 Change oil in car
 
-REMOVE oil fill cap on top of engine
-PLACE a oil catch pan under cars oil tank
-REMOVE drain plug 
-LET oil drain into pan
-REMOVE oil filter
-LET drain into pan 
-TAKE a new filter in hand
-USE a finger to spread some old oil on new filter o-ring
-SCREW on new filter
-SCREW drain plug back into oil pan
-FILL oil resevior with 5 quarts of new oil 
-SCREW cap back on oil resevior 
-
+FUNCTION changeOil(carMileage)
+  If(carMileage < 6000)
+    THEN remove oil fill cap;
+    THEN place oil catch pan under car;
+    THEN remove drain plug;
+      IF(oilPan is empty)
+        THEN remove oil filter;
+        THEN install new oil filter;
+      END IF
+    WHILE(oilResivoir is empty)
+      DO keep filling oil tank;
+    END WHILE
+    THEN screw on oil fill cap;
+  END IF
+END
 
 2.
 
@@ -42,5 +64,3 @@ Amazon: When you add items to your cart...they recomend similiar items and allow
 3.
 
 I would think an algorithm has to be effiecent, and reliable. It couldnt use a massive amount of reasources, or take a great deal of time. I think if an algorithm is being used on a massive scale, it needs really minimize mistakes. I think it would have to be really specific as well...this would limit the chance 
-
-
