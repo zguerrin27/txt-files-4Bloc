@@ -1,0 +1,233 @@
+1. A Binary Tree is a Data structure and is unique because each node may only have 2 children nodes...a right node and a left node.
+
+2. A Heuristic is a guess that an algorithm may make in order to make a process faster at the expensive of accuracy. 
+
+3. I would say asking a function to find a number in a set of numbers...It would have to make a guess and then work through the rest of the numbers untill it finds the number it is searching for. If its trying to do this in the least amount of time then that would depend greatly on the first initial guess or Heuristic.
+
+4. DFS = Start at the root and explore as far as possible along each branch before going back... BFS = Start at the root and explore every neighbor node before going down another level.
+
+5. Undirected means that the way information travels is undefinded...it can go either way like a 2-way street, the nodes are simply connected ...a-cyclic means that the graph does not form a loop and unweighted means that the cost of going from one node to another is not defined. an undirected, a-cyclic, unweighted graph would be all of these things.
+
+6. A-cyclic, undirected, connected
+
+*********************** Programming Questions ************************
+
+1.
+
+function Node(value){
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+
+
+function BinarySearchTree() {
+ this.root = null;
+}
+
+
+BinarySearchTree.prototype.insert = function(value){
+ let node = new Node(value);
+ if(!this.root) this.root = node;
+ else{
+    let current = this.root;
+    while(current){
+       if(node.value < current.value){
+       if(!current.left){
+           current.left = node;
+           break;
+         }
+         current = current.left;
+         } 
+       else if(node.value > current.value){
+         if(!current.right){
+            current.right = node;
+            break;
+           }
+          current = current.right;
+          } 
+        else {
+          break; 
+          }
+         }
+        }
+    return this;
+ };
+
+
+BinarySearchTree.prototype.contains = function(value){
+ let current = this.root;
+ while(current){
+ if(value === current.value) return true;
+ if(value < current.value) current = current.left;
+ if(value > current.value) current = current.right;
+ }
+ return false;
+};
+
+
+let bst = new BinarySearchTree();
+
+bst.insert(8);
+bst.insert(3);
+bst.insert(10);
+bst.insert(1);
+bst.insert(6);
+bst.insert(14);
+bst.insert(4);
+bst.insert(7);
+bst.insert(14);
+bst.insert(13);
+
+console.log(bst.root.value);
+console.log(bst.root.left.value);
+console.log(bst.root.left.left.value);
+console.log(bst.root.left.right.value);
+console.log(bst.root.left.right.left.value);
+console.log(bst.root.left.right.right.value);
+console.log(bst.root.right.value);
+console.log(bst.root.right.right.value);
+console.log(bst.root.right.right.left.value);
+
+console.log(bst.contains(10));   // true 
+console.log(bst.contains(23));   // false
+
+
+// console.log(bst.root);
+// console.log(bst.root.left);
+// console.log(bst.root.left.left);
+// console.log(bst.root.left.right);
+// console.log(bst.root.left.right.left);
+// console.log(bst.root.left.right.right);
+// console.log(bst.root.right);
+// console.log(bst.root.right.right);
+// console.log(bst.root.right.right.left);
+
+
+2.  ----------------------------------------------------------------------------------------------------------------------------------------
+
+function Node(value){
+  this.value = value;
+  this.left = null;
+  this.right = null;
+}
+
+function BinarySearchTree(){
+  this.root = null;
+}
+
+BinarySearchTree.prototype.insert = function(value){
+ let node = new Node(value);
+ if(!this.root) this.root = node;
+ else{
+    let current = this.root;
+    while(current){
+       if(node.value < current.value){
+       if(!current.left){
+           current.left = node;
+           break;
+         }
+         current = current.left;
+         } 
+       else if(node.value > current.value){
+         if(!current.right){
+            current.right = node;
+            break;
+           }
+          current = current.right;
+          } 
+        else {
+          break; 
+          }
+         }
+        }
+    return this;
+ };
+
+BinarySearchTree.prototype.contains = function(value){
+ let current = this.root;
+ while(current){
+ if(value === current.value) return true;
+ if(value < current.value) current = current.left;
+ if(value > current.value) current = current.right;
+ }
+ return false;
+};
+
+//FIND Lowest COmmon Ancestor ( Shared Node)
+// COunt Path from there and total = distance between
+//or
+// dfs 8->4 
+// dfs 8 -> 10 
+// [ 8, 3, 6, 4]
+// [8, 10]
+// loop through and compare, find same num, eliminate same num, total left over lengths..total is distance
+
+
+BinarySearchTree.prototype.distanceFrom = function(common, val){
+  if(!common) {
+    return undefined;
+  }
+  if(common.value == val) {
+    return 0;
+  } else {
+    if(val < common.value) {
+      return 1 + bst.distanceFrom(common.left, val);
+    } else if(val > common.value){
+      return 1 + bst.distanceFrom(common.right, val);
+    }
+  }
+}
+
+
+BinarySearchTree.prototype.findLCA = function(current, n1, n2){
+  if(!current) {
+    return null;
+  }
+  if(current.value > n1 && current.value > n2) {
+    return bst.findLCA(current.left, n1, n2);
+  }
+  if(current.value < n1 && current.value < n2) {
+    return bst.findLCA(current.right, n1, n2);
+  }
+  return current;
+}
+
+
+BinarySearchTree.prototype.distanceBetween = function(n1, n2) {
+  let current = bst.root;
+  let commonAncestor = bst.findLCA(current, n1, n2);
+  
+  if(!commonAncestor) {
+    return -1;
+  }
+  if( bst.distanceFrom(commonAncestor, n1) == -1 ) {
+    return -1;
+  }
+  if( bst.distanceFrom(commonAncestor, n2) == -1 ) {
+    return -1;
+  }
+  return bst.distanceFrom(commonAncestor, n1) + bst.distanceFrom(commonAncestor, n2);
+}
+
+
+let bst = new BinarySearchTree();
+
+bst.insert(8);
+bst.insert(3);
+bst.insert(10);
+bst.insert(1);
+bst.insert(6);
+bst.insert(14);
+bst.insert(4);
+bst.insert(7);
+bst.insert(14);
+bst.insert(13);
+
+
+console.log(bst.distanceBetween(4, 10));
+console.log(bst.distanceBetween(8, 10));
+console.log(bst.distanceBetween(1, 14));
+
+
+
