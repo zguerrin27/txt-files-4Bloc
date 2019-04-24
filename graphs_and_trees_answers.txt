@@ -12,7 +12,10 @@
 
 *********************** Programming Questions ************************
 
-1.
+1. Given a Binary Search Tree and a value, write a function that checks to see whether the value exists within the tree.
+
+First I will need to create a function to determine if a node exists within my tree. I am going to search the tree and return true if I find the value. First I will pull in the root and my starting node. Then I will check if that current node is equal to the value that I am looking for...if not then check if the value is less than my current node..if so change node to the left node. If not then it means it is larger and I should change to the right node if there is one. I will do this over and over untill I either find the node value I am searching for and return true, or do not find it and return false.
+
 
 function Node(value){
   this.value = value;
@@ -20,11 +23,9 @@ function Node(value){
   this.right = null;
 }
 
-
 function BinarySearchTree() {
  this.root = null;
 }
-
 
 BinarySearchTree.prototype.insert = function(value){
  let node = new Node(value);
@@ -106,6 +107,12 @@ console.log(bst.contains(23));   // false
 
 2.  ----------------------------------------------------------------------------------------------------------------------------------------
 
+Given a Binary Search Tree and two nodes, n1 and n2, write a function that finds the distance between the two nodes.
+
+What I will do here is first find the lowest common ancestor node for both of the value. This means the closest parent node that they both have, then count the steps to each entered value. total the steps and that is the number of steps it will take to get from one to the other. I will have to create a few functions to accomplish this. One to find the lowest common ancester...the second to count the distance from the ancestor to each node value...that function will need to store those values and pass it to the last function that basicaly combines those numbers and returns the distance!!!
+
+
+
 function Node(value){
   this.value = value;
   this.left = null;
@@ -154,9 +161,9 @@ BinarySearchTree.prototype.contains = function(value){
  return false;
 };
 
-//FIND Lowest COmmon Ancestor ( Shared Node)
-// COunt Path from there and total = distance between
-//or
+// Find Lowest Common Ancestor ( Shared Node)
+// Count Path from there and total = distance between
+// or
 // dfs 8->4 
 // dfs 8 -> 10 
 // [ 8, 3, 6, 4]
