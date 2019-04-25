@@ -1,0 +1,21 @@
+1. A function that estimates the time a program will take to execute.
+
+2. The physical time it takes for an algorithm or program to run.
+
+3. You add up the runtimes of all of the statements within a program, then simplify the term to the largest expression, and drop any constants. 
+
+4. 
+
+O(1), O(log n), O(n),  O(n log n), O(n^2), O(2^n)
+
+O(1), O(log n), O(n),  O(n log n), O(n^2), O(2^n), O(n!)
+
+5. O(n) and my example will be picking up playing cards off the floor. The amount of time it takes, is connected to how many cards I need to pick up!!!
+
+6. O(n)
+
+7. O(n^2)
+
+8. O(2^n)
+
+9. Number 6 has the most effecient code snippet. 
