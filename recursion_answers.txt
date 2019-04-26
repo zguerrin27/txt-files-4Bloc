@@ -1,0 +1,59 @@
+1.
+
+Recursion: The process of having a function call itself as it moves incrementally towards a base case.
+Iteration: The process of using a loop to repeat a task.
+To me its a matter of deciding which will work best for the given problem. Generally the recursive functions will cost more reasources and could be slower. Sometimes the iterative functions will look more straightforward, but sometimes they will be much harder to breakdown into small steps and setup. Its good to have options!
+
+2. 
+
+Factorial, Binary Search, Fibonacci Numbers, Greatest Common Divisor, Merge Sort
+
+3. 
+
+You should use recursion when dealing with doing something with sub-results that start with known cases, and you should avoid recursive functions when the performance costs outweigh the extra time it takes to make and the complexity of an iterative approach. An example of time to use recursion is the Factorial, and a time to use iterative is finding the largest number in an array of numbers.
+
+4.
+
+Factorial: They both fail if fead a negative number. The recursive version is less code. Iterative is going to be much faster.
+
+Maximum: First off the itterative approach is far less code. They both store values to variables and ultimately compare them...The Rescursive approach just does so much slower. It makes many more calculations and loops. The iterative approach loops once and campares as it loops.
+
+Fibonacci: The interesting thing here is that Fibonacci lends itself to being recursive becuase it has base cases and then needs to make step by step calculastions...but I think it would end up taking far more time than the iterative version if you were feeding it a large number. I like how the iterative approach uses a loop to move the values of its variabled step by step to the end number instead of making a bunch of calls and math as in the recursive.
+
+5.
+
+function calculateArray(array){
+      let counter =0;
+   for (var i=0; i <array.length; i++){
+     if (typeof array[i] === "object"){
+         counter += calculateArray(array[i]);
+     } else { 
+       counter++;
+     }
+   } 
+    return counter;
+}
+
+console.log(calculateArray([4,2,1,[6,2,2]]));
+
+
+6.
+
+function isPalindrome(str) {
+    var strLen = str.length;
+    if (strLen === 0 || strLen === 1) {
+        return true;
+    }
+    
+    if (str[0] === str[strLen - 1]) {
+        return isPalindrome( str.slice(1, strLen - 1) );
+    }
+    
+    return false;
+};
+
+console.log(isPalindrome('racecar'));
+
+7.
+
+Its funny because recursion is the act of a function calling itsself...by you typing in recursion, and google asking if you meant " recursion" its playing on the meaning of recursion. 
