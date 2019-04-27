@@ -1,0 +1,76 @@
+1. 
+
+I would say that an example of a linear search in real life would be me flipping through each page of a book...page by page, starting with the first looking for a certain bit of information.
+
+2.
+
+An example of a binary search would be me wanting to look up some information that is on a certain page of a book, and me starting at the halfway point, and continueing to go halfs until I find what I am looking for. 
+
+3. 
+
+7 iterations 
+
+4.
+
+3 iterations
+
+5.
+
+Well with an unsorted list of a million things you would have to use the linear search..because Binary requires a sorted list.
+ ( this is going to take a while =[ )
+
+6.
+
+I would use a Binary search. You can do so because this list is sorted.. and this will be much faster because it cuts the collection in half each iteration.
+
+
+
+---------------------- PROGRAMMING QUESTIONS --------------------------
+
+
+1. 
+
+function binarySearch(collection, target) {
+    let left = 0;
+    let right = collection.length - 1;
+    while (left <= right) {
+        const mid = left + Math.floor((right - left) / 2);
+        if (collection[mid] === target) {
+            return "found it";
+        }
+        if (collection[mid] < target) {
+            left = mid + 1;
+        } else {
+            right = mid - 1;
+        }
+    }
+    return "didnt find it";
+}
+
+
+
+let dictionary = [ 'apple', 'acorn', 'albatross', 'bank', 'bananas']
+
+console.log(binarySearch(dictionary, 'albatross')); // found it!!
+console.log(binarySearch(dictionary, 'zipper')); // found it!!
+
+
+
+2.
+
+ function linearSearch(collection, target) {
+   var result = null, value;
+   for(var i = 0; i < collection.length; i++) {
+     value = collection[i];
+     if(value === target){
+       result = i;
+       return true;
+     }
+   }
+   return false;
+ };
+
+var fishArr = ['goldfish', 'puffer-fish', 'shark', 'japanese-fighting-fish', 'koy fish', 'white spotted goldfish'];
+
+console.log(linearSearch(fishArr, 'white spotted goldfish')); // returns true
+console.log(linearSearch(fishArr, 'great white shark')); // returns false
