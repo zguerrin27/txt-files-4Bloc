@@ -1,0 +1,70 @@
+1.
+
+function bubbleSort(collection) {
+    var swapped;
+    do {
+        swapped = false;
+        for (let i=0; i < collection.length-1; i++) {
+            if (collection[i] > collection[i+1]) {
+                let temp = collection[i];
+                collection[i] = collection[i+1];
+                collection[i+1] = temp;
+                swapped = true;
+            }
+        }
+    } while (swapped);
+  return collection;
+}
+
+let collection = [33, 103, 3, 726, 2000, 845, 138, 664, 7];
+console.log(bubbleSort(collection));
+
+2. 
+
+FUNCTION partitionFunc(left, right, pivot)
+   SET leftPointer equal to left
+   SET rightPointer equal to right - 1
+
+   WHILE True DO 
+      WHILE A[++leftPointer] < pivot DO
+         nothing            
+      END WHILE
+		
+      WHILE rightPointer > 0 && A[--rightPointer] > pivot DO
+         nothing         
+      END WHILE
+		
+      IF leftPointer >= rightPointer THEN
+         break
+      ELSE                
+         swap leftPointer,rightPointer
+      END IF
+		
+   END WHILE
+	
+   SWAP leftPointer,right
+   RETURN leftPointer
+	
+END
+
+FUNCTION quickSort(left, right)
+
+   IF right-left <= 0 THEN
+      return
+   ELSE     
+      SET pivot equal A[right]
+      SET partition equal partitionFunc(left, right, pivot)
+      CALL quickSort(left,partition-1)
+      CALL quickSort(partition+1,right)    
+   END IF		
+   
+END
+
+3. 
+
+Id say that they are more efficient because they break the sorting steps into a sections instead of moving through the data 1 by 1. Like the merge sort takes all of the data, breaks it into halfs multiple times..organzes that and puts it back together...quicksort picks a pivot and compares to that. The recursive step is easier too
+
+
+4. 
+
+A bucket sort works by distributing elements of the array into buckets that contain a range of elements...those buckets are then sorted individually or by the bucketsort being called recursively on itself. The ideal input for a BucketSort would be data that has mostly consistent close values..IF you have a 200 buckets, and say 90% of the values all fall in the range of one bucket...it would end up being slow.
